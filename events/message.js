@@ -5,6 +5,14 @@ module.exports = (client, message) => {
     return kick(message)
   }
   if (message.content === 'beep') {
-    return message.reply('bop');
+    return message.react('🤖')
+    .then(() => {
+      return message.reply('Beep bop');
+      console.log('OK');
+    })
+    .catch((error) => {
+      console.log(error);
+    }
+    );
   }
 }
