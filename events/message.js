@@ -1,22 +1,30 @@
+require("dotenv").config();
 const kick = require('../commands/kick')
+const help = require('../commands/help')
 
 module.exports = (client, message) => {
-  if (message.author.username === client.user.username) {
+  if (message.author.bot || message.content.indexOf(process.env.PREFIX) != 0) {
     return;
   }
 
-  if (message.content.startsWith('!kick')) {
-    return kick(message)
+  const tidyMessage = message.content.slice(process.env.PREFIX.length).trim().toLowerCase()
+
+  switch (tidyMessage) {
+    case 'help me':
+      return help(message);
   }
-  if (message.content.toLowerCase().includes('beep')) {
-    return message.react('🤖')
-    .then(() => {
-      return message.reply('Beep bop');
-      console.log('OK');
-    })
-    .catch((error) => {
+
+  if (tidyMessage.startsWith('!kick')) {
+    return kick(message);
+  }
+  if (tidyMessage.includes('beep')) {
+    try {
+      message.react('🤖')
+      message.reply('Beep bop');
+      return;
+    } catch (error) {
       console.log(error);
     }
-    );
   }
+
 }
