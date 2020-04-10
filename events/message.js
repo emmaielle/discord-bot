@@ -3,16 +3,14 @@ const kick = require('../commands/kick')
 const help = require('../commands/help')
 
 module.exports = (client, message) => {
-  if (message.author.bot || message.content.indexOf(process.env.PREFIX) != 0) {
+  if (message.author.bot || !message.mentions.has('696492092897230849', {
+    ignoreEveryone: true,
+  })) {
     return;
   }
-
+  message.reply('Please dont mention me')
   const tidyMessage = message.content.slice(process.env.PREFIX.length).trim().toLowerCase()
-
-  switch (tidyMessage) {
-    case 'help me':
-      return help(message);
-  }
+  // console.log(tidyMessage)
 
   if (tidyMessage.startsWith('!kick')) {
     return kick(message);
@@ -22,6 +20,13 @@ module.exports = (client, message) => {
       message.react('🤖')
       message.reply('Beep bop');
       return;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  if (tidyMessage.includes('help')) {
+    try {
+      return help(message);
     } catch (error) {
       console.log(error);
     }
