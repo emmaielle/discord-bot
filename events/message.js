@@ -8,12 +8,10 @@ module.exports = (client, message) => {
   // console.log(client)
 
   if (tidyMessage.startsWith('jarvis say')) {
-    setTimeout(() => {
+    return setTimeout(() => {
       return message.channel.send(`shut up ${message.author.username}`)
     }, 1000);
-  } else if (message.author.bot || !message.mentions.has('696492092897230849', {
-    ignoreEveryone: true,
-  })) {
+  } else if (message.author.bot || !message.mentions.has('696492092897230849', {ignoreEveryone: true})) {
     return;
   }
 
