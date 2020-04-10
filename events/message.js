@@ -5,10 +5,12 @@ const help = require('../commands/help')
 module.exports = (client, message) => {
 
   const tidyMessage = message.content.toLowerCase()
-  console.log(client)
+  // console.log(client)
 
   if (tidyMessage.startsWith('jarvis say')) {
-    return message.channel.send(`shut up ${message.author.username}`)
+    setTimeout(() => {
+      return message.channel.send(`shut up ${message.author.username}`)
+    }, 1000);
   } else if (message.author.bot || !message.mentions.has('696492092897230849', {
     ignoreEveryone: true,
   })) {
