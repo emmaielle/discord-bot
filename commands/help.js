@@ -1,6 +1,6 @@
 module.exports = message => {
 
-  return message.reply(
+  return message.channel.send(
     `No one will help you, ${message.author.username}`,
     { disableMentions: true },
   )

@@ -3,33 +3,40 @@ const kick = require('../commands/kick')
 const help = require('../commands/help')
 
 module.exports = (client, message) => {
-  if (message.author.bot || !message.mentions.has('696492092897230849', {
+
+  const tidyMessage = message.content.toLowerCase()
+  console.log(client)
+
+  if (tidyMessage.startsWith('jarvis say')) {
+    return message.channel.send(`shut up ${message.author.username}`)
+  } else if (message.author.bot || !message.mentions.has('696492092897230849', {
     ignoreEveryone: true,
   })) {
     return;
   }
-  message.reply('Please dont mention me')
-  const tidyMessage = message.content.slice(process.env.PREFIX.length).trim().toLowerCase()
-  // console.log(tidyMessage)
 
+  // 531985892672405515
   if (tidyMessage.startsWith('!kick')) {
     return kick(message);
   }
-  if (tidyMessage.includes('beep')) {
+  else if (tidyMessage.includes('beep')) {
     try {
       message.react('🤖')
-      message.reply('Beep bop');
+      message.channel.send('Beep bop');
       return;
     } catch (error) {
       console.log(error);
     }
   }
-  if (tidyMessage.includes('help')) {
+  else if (tidyMessage.includes('help')) {
     try {
       return help(message);
     } catch (error) {
       console.log(error);
     }
+  }
+  else {
+    message.reply('Please dont mention me')
   }
 
 }
