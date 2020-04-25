@@ -5,7 +5,7 @@ var emojis = [
 module.exports = message => {
   const randomNumber = (Math.random() * 10);
 
-  if (randomNumber > 5) {
+  if (randomNumber > 6) {
     const emoji = emojis[Math.floor(Math.random() * emojis.length)];
     return message.react(emoji);
   }
