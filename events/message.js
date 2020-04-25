@@ -1,17 +1,18 @@
 require("dotenv").config();
 const kick = require('../commands/kick')
 const help = require('../commands/help')
+const randomReact = require('../commands/reactionRandom')
 
 module.exports = (client, message) => {
-
+  randomReact(message);
   const tidyMessage = message.content.toLowerCase()
 
   if (tidyMessage.startsWith('jarvis')) {
     return setTimeout(() => {
-      if (tidyMessage.includes('mute')) {
+      if (tidyMessage.includes('isolate') || tidyMessage.includes('mute')) {
         try {
           const firstMention = message.mentions.members.first();
-          firstMention.voice.setMute(false, 'what goes around...');
+          firstMention.voice.setMute(false);
           message.member.voice.setMute(true)
         } catch (error) {
           console.log('user is not connected to voice')
