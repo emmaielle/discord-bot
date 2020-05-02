@@ -5,7 +5,7 @@ const randomReact = require('../commands/reactionRandom')
 
 module.exports = (client, message) => {
   randomReact(message);
-  const tidyMessage = message.content.toLowerCase()
+  const tidyMessage = message.content.toLowerCase();
 
   if (tidyMessage.startsWith('jarvis')) {
     return setTimeout(() => {
